@@ -1,0 +1,13 @@
+server:
+  listenAddr: 0.0.0.0
+  listenPort: 8081
+  tasks_log_file: tasks.log
+
+datasource:
+  dirverName: mysql
+  host: 124.222.238.134
+  port: 5730
+  database: db_flagship
+  username: dba_yix
+  password: xiangerfer
+  charset: utf8
