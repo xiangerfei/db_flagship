@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"golang.org/x/crypto/bcrypt"
@@ -79,6 +80,8 @@ func Login(ctx *gin.Context){
 	// 数据验证
 	var user model.User;
 	DB.Where("Telephone = ?", telephone).First(&user)
+	// 带调试日志，我之前将这个写在了标准输出上。可以根据这个看看如果生成的sql，也可以看看数据库querylog。
+	//DB.Debug().Where("Telephone = ?", telephone).First(&user)
 	if user.ID == 0{
 		response.Response(ctx, http.StatusUnprocessableEntity, 424, nil, "用户不存在")
 		return
@@ -109,6 +112,7 @@ func Login(ctx *gin.Context){
 func Info(ctx *gin.Context){
 
 	user, _ := ctx.Get("user")
+	fmt.Printf("TYPE: %T", user)
 
 	response.Success(ctx, 200, gin.H{"user": dto.ToUserDto(user.(model.User))}, "获取用户信息成功")
 

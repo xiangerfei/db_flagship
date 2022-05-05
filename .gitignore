@@ -1,0 +1,3 @@
+flagship_backend/config/application.yml
+*.log
+flagship_backend/files/*

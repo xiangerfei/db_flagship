@@ -9,15 +9,23 @@ type Logger struct {
 	log.Logger
 }
 
-func (logger *Logger) Info(format string, a ...interface{}){
+func (logger *Logger) Debug(format string, a ...interface{}){
+	logger.SetPrefix("DEBUG:")
+	logger.Output(2, fmt.Sprintf(format, a...))
+}
 
-	logger.Output(2, "INFO:" + fmt.Sprintf(format, a...))
+
+func (logger *Logger) Info(format string, a ...interface{}){
+	logger.SetPrefix("INFO:")
+	logger.Output(2, fmt.Sprintf(format, a...))
 }
 
 func (logger *Logger) Warning(format string, a ...interface{}){
-	logger.Output(2, "Warning:" + fmt.Sprintf(format, a...))
+	logger.SetPrefix("WARNING:")
+	logger.Output(2, fmt.Sprintf(format, a...))
 }
 
 func (logger *Logger) Error(format string, a ...interface{}){
-	logger.Output(2, "Error:" + fmt.Sprintf(format, a...))
+	logger.SetPrefix("ERROR:")
+	logger.Output(2, fmt.Sprintf(format, a...))
 }

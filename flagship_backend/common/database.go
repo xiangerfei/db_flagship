@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	"github.com/spf13/viper"
+	"log"
+	"os"
+	"time"
 	"xiangerfer.com/db_flagship/model"
 	_ "github.com/go-sql-driver/mysql"
 
@@ -30,7 +33,20 @@ func InitDB() *gorm.DB{
 		panic("failed to connect mysql, err: " + err.Error())
 	}
 
+	// SetMaxIdleConns 设置空闲连接池中的最大连接数。
+	db.DB().SetMaxIdleConns(10)
+
+	// SetMaxOpenConns 设置数据库连接最大打开数。
+	db.DB().SetMaxOpenConns(100)
+
+	// SetConnMaxLifetime 设置可重用连接的最长时间
+	db.DB().SetConnMaxLifetime(time.Hour)
+
+	// db
+	db.SetLogger(log.New(os.Stdout, "\r\n", 0))
+
 	db.AutoMigrate(&model.User{}, &model.Host{})
+	db.AutoMigrate(&model.TestGorm{})
 	DB = db
 	return db
 }
