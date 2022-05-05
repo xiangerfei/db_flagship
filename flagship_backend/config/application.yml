@@ -10,5 +10,5 @@ datasource:
   port: 1234
   database: db_name
   username: root
-  password: 123123
+  password: 123456
   charset: utf8
