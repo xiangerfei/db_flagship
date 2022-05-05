@@ -4,7 +4,6 @@ server:
   tasks_log_file: tas
   tasks_log_split_interval: hour # 可选日/时 或日期
 
-
 datasource:
   dirverName: mysql
   host: 124.222.238.134
